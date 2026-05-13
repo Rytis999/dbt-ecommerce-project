@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: customer_revenue
+    description: "Customer level revenue metrics"
+
+    columns:
+      - name: customer_id
+        tests:
+          - not_null
+          - unique
+
+      - name: total_spent
+        tests:
+          - not_null
+
+  - name: orders_with_revenue
+    description: "Order level revenue"
+
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - unique
+
+-name: customer_id
+  tests:
+    - relationships:
+        to: ref('stg_customers')
+        field: customer_id
